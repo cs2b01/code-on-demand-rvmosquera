@@ -1,6 +1,7 @@
 from flask import Flask,render_template, request, session, Response, redirect
 from database import connector
 from model import entities
+from flask_socketio import SocketIO
 import json
 import time
 
@@ -9,14 +10,19 @@ engine = db.createEngine()
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
+
+socketio = SocketIO(app)
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/static/<content>')
 def static_content(content):
-    return render_template(content)
+    username = request.args.get('username', default = '*', type = str)
 
+    return render_template(content, username=username)
 
 @app.route('/users', methods = ['GET'])
 def get_users():
@@ -42,7 +48,7 @@ def get_user(id):
 @app.route('/create_test_users', methods = ['GET'])
 def create_test_users():
     db_session = db.getSession(engine)
-    user = entities.User(name="David", fullname="Lazo", password="1234", username="qwerty")
+    user = entities.User(name="Raul", fullname="Mosquera", password="4321", username="rvmosq")
     db_session.add(user)
     db_session.commit()
     return "Test user created!"
@@ -74,13 +80,25 @@ def authenticate():
             ).filter(entities.User.username == username
             ).filter(entities.User.password == password
             ).one()
-        message = {'message': 'Authorized'}
+        #message = '{username : '+ user.username +'}'
+        message = user.username
+        #y = json.dumps(message)
+
         return Response(message, status=200, mimetype='application/json')
+
     except Exception:
         message = {'message': 'Unauthorized'}
         return Response(message, status=401, mimetype='application/json')
 
+def messageReceived(methods=['GET', 'POST']):
+    print('message was received!!!')
+
+@socketio.on('my event')
+def handle_my_custom_event(json, methods=['GET', 'POST']):
+    print('received my event: ' + str(json))
+    socketio.emit('my response', json, callback=messageReceived)
 
 if __name__ == '__main__':
     app.secret_key = ".."
-    app.run(port=8080, threaded=True, host=('127.0.0.1'))
+    #app.run(port=8080, threaded=True, host=('127.0.0.1'))
+    socketio.run(app, debug=True)

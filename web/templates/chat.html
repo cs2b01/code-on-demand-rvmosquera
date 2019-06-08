@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat PDB</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<form action="" method="POST">
+    <input id="username" class="username" value="{{ username }}" disabled />
+    <input id="message" type="text" class="message" placeholder="Messages"/>
+    <input type="submit"/>
+</form>
+
+<h3 style='color: #ccc;font-size: 30px;'>No message yet..</h3>
+
+<div class="message_holder"></div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

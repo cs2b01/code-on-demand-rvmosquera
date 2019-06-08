@@ -4,26 +4,46 @@
     <meta charset="UTF-8">
     <title>Chat Login</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="login.js"></script>
 </head>
 <body>
 
-    <table>
-        <tr>
-            <td>Username</td>
-            <td><input type="text" name="username" id="username"/></td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td><input type="password" name="password" id="password" /></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="button" value="login" onclick="getData()"/>
-            </td>
-        </tr>
-    </table>
+<!--<table>
+    <tr>
+        <td class="form-control-label">Username</td>
+        <td><input type="text" name="username" id="username" class="form-control form-control-lg"/></td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td><input type="password" name="password" id="password" /></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="button" value="login" onclick="getData()"/>
+        </td>
+    </tr>
+</table>-->
+<form>
+    <div class="col-4">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" name="username" id="username" class="form-control" placeholder="Ingresa el username"/></td>
+    </div>
+    <div class="col-4">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Ingresa el password"/></td>
+    </div>
+    <input type="button" value="login" class="btn btn-primary" onclick="getData()"/>
 
-    <label id="action">Waiting for user</label>
+    </div>
+</form>
+
+<label id="action">Waiting for user</label>
+<div>
+    <img src="/static/images/loading.gif" id="loading" style="display:none">
+    <img src="/static/images/ok.jpg" id="ok" style="display:none">
+    <img src="/static/images/wrong.jpg" id="canc" style="display:none">
+</div>
 </body>
 </html>
