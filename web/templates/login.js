@@ -25,8 +25,8 @@ function getData(){
                 $('#loading').hide();
                 $('#ok').show();
                 $('#canc').hide();
-                var url = 'http://' + document.domain + ':' + location.port + '/static/chat.html?username=rmosque';
-                $(location).attr('href',url);
+                //var url = 'http://' + document.domain + ':' + location.port + '/static/chat.html?username=rmosque';
+                //$(location).attr('href',url);
             },
             error: function(response){
                 alert(JSON.stringify(response));
@@ -42,10 +42,10 @@ function getData(){
                     $('#ok').show();
                     $('#canc').hide();
 
-                username = response['responseText']
+                //username = response['responseText']
 
-                 var url = 'http://' + document.domain + ':' + location.port + '/static/chat.html?username=' + username;
-                 $(location).attr('href',url);
+                 //var url = 'http://' + document.domain + ':' + location.port + '/static/chat.html?username=' + username;
+                 //$(location).attr('href',url);
                 }
             }
         });
